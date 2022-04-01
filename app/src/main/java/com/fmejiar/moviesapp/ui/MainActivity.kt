@@ -1,7 +1,8 @@
-package com.fmejiar.moviesapp
+package com.fmejiar.moviesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.fmejiar.moviesapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

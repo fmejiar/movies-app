@@ -1,10 +1,11 @@
-package com.fmejiar.moviesapp
+package com.fmejiar.moviesapp.ui.movies
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fmejiar.moviesapp.R
 import com.fmejiar.moviesapp.databinding.FragmentMoviesBinding
 
 class MoviesFragment : Fragment() {
