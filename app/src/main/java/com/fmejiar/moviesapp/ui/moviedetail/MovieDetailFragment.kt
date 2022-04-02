@@ -36,7 +36,7 @@ class MovieDetailFragment : Fragment() {
         binding.titleDetailTextView.text = args.title
         binding.overviewDetailTextView.text = args.overview
         binding.voteAverageDetailTextView.text = args.voteAverage.toString()
-        binding.releaseDateDetailTextView.text = args.releaseDate
+        binding.releaseDateDetailTextView.text = "Relaased ${args.releaseDate}"
     }
 
 }
