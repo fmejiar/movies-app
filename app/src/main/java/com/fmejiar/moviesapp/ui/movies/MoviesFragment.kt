@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.fmejiar.moviesapp.R
 import com.fmejiar.moviesapp.core.UpcomingMoviesResult
 import com.fmejiar.moviesapp.data.model.Movie
@@ -57,27 +58,36 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
     }
 
     private fun setupObserver() {
-        moviesViewModel.fetchUpcomingMovies().observe(viewLifecycleOwner, Observer { upcomingMoviesResult ->
-            when(upcomingMoviesResult) {
-                is UpcomingMoviesResult.Loading -> {
-                    Log.d("LiveData", "Loading...")
-                    binding.progressBarRelativeLayout.visibility = View.VISIBLE
+        moviesViewModel.fetchUpcomingMovies()
+            .observe(viewLifecycleOwner, Observer { upcomingMoviesResult ->
+                when (upcomingMoviesResult) {
+                    is UpcomingMoviesResult.Loading -> {
+                        Log.d("LiveData", "Loading...")
+                        binding.progressBarRelativeLayout.visibility = View.VISIBLE
+                    }
+                    is UpcomingMoviesResult.Success -> {
+                        Log.d("LiveData", "${upcomingMoviesResult.data}")
+                        binding.progressBarRelativeLayout.visibility = View.GONE
+                        upcomingMoviesAdapter.setUpcomingMovies(upcomingMoviesResult.data.results)
+                    }
+                    is UpcomingMoviesResult.Failure -> {
+                        Log.d("Error", "${upcomingMoviesResult.exception}")
+                        binding.progressBarRelativeLayout.visibility = View.GONE
+                    }
                 }
-                is UpcomingMoviesResult.Success -> {
-                    Log.d("LiveData", "${upcomingMoviesResult.data}" )
-                    binding.progressBarRelativeLayout.visibility = View.GONE
-                    upcomingMoviesAdapter.setUpcomingMovies(upcomingMoviesResult.data.results)
-                }
-                is UpcomingMoviesResult.Failure -> {
-                    Log.d("Error", "${upcomingMoviesResult.exception}")
-                    binding.progressBarRelativeLayout.visibility = View.GONE
-                }
-            }
-        })
+            })
     }
 
     override fun onUpcomingMovieClick(movie: Movie, position: Int) {
-        Log.d("UpcomingMovie", "onUpcomingMovieClick: $movie" )
+        Log.d("UpcomingMovie", "onUpcomingMovieClick: $movie")
+        val action = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
+            movie.poster_path,
+            movie.vote_average.toFloat(),
+            movie.overview,
+            movie.title,
+            movie.release_date
+        )
+        findNavController().navigate(action)
     }
 
 }
