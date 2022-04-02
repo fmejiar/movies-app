@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.fmejiar.moviesapp.R
+import com.fmejiar.moviesapp.databinding.FragmentMovieDetailBinding
 
 class MovieDetailFragment : Fragment() {
+
+    private lateinit var binding: FragmentMovieDetailBinding
+    private val args by navArgs<MovieDetailFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,5 +25,18 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentMovieDetailBinding.bind(view)
+        setupUI()
     }
+
+    private fun setupUI() {
+        Glide.with(requireContext())
+            .load("https://image.tmdb.org/t/p/w500/${args.posterPathImageUrl}").centerCrop()
+            .into(binding.posterPathDetailImageView)
+        binding.titleDetailTextView.text = args.title
+        binding.overviewDetailTextView.text = args.overview
+        binding.voteAverageDetailTextView.text = args.voteAverage.toString()
+        binding.releaseDateDetailTextView.text = args.releaseDate
+    }
+
 }
