@@ -1,4 +1,11 @@
 package com.fmejiar.moviesapp.data.remote
 
-class MoviesDataSource {
+import com.fmejiar.moviesapp.application.AppConstants.API_KEY
+import com.fmejiar.moviesapp.data.model.MovieList
+import com.fmejiar.moviesapp.domain.repository.WebService
+
+class MoviesDataSource(private val webService: WebService) {
+
+    suspend fun getUpcomingMovies(): MovieList = webService.getUpcomingMovies(API_KEY)
+
 }
