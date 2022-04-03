@@ -3,7 +3,7 @@ package com.fmejiar.moviesapp.data.model
 data class Movie(
     val id: Int = -1,
     val adult: Boolean = false,
-    val backdrop_path: String = "",
+    val backdrop_path: String? = "",
     val original_title: String = "",
     val original_language: String = "",
     val overview: String = "",
