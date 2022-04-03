@@ -23,7 +23,7 @@ fun List<MovieEntity>.toMovieList(): MovieList = MovieList(
 fun MovieEntity.toMovie(): Movie = Movie(
     this.id,
     this.adult,
-    this.backdrop_path,
+    this.backdrop_path ?: "",
     this.original_title,
     this.original_language,
     this.overview,
@@ -39,7 +39,7 @@ fun MovieEntity.toMovie(): Movie = Movie(
 fun Movie.toMovieEntity(): MovieEntity = MovieEntity(
     this.id,
     this.adult,
-    this.backdrop_path,
+    this.backdrop_path ?: "",
     this.original_title,
     this.original_language,
     this.overview,
