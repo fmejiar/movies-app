@@ -11,4 +11,7 @@ class LocalMoviesDataSource(private val moviesDao: MoviesDao) {
     }
 
     suspend fun saveUpcomingMovie(movie: MovieEntity) = moviesDao.saveUpcomingMovie(movie)
+
+    fun doLogIn(user: String, password: String): Boolean =
+        (user == "Admin" && password == "Password*123")
 }
