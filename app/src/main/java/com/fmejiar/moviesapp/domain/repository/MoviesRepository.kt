@@ -6,4 +6,6 @@ interface MoviesRepository {
 
     suspend fun getUpcomingMovies(): MovieList
 
+    suspend fun doLogIn(user: String, password: String): Boolean
+
 }
