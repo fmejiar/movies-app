@@ -4,16 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.fmejiar.moviesapp.core.UpcomingMoviesResult
-import com.fmejiar.moviesapp.domain.repository.MoviesRepository
+import com.fmejiar.moviesapp.domain.usecase.GetUpcomingMoviesUseCase
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 
-class MoviesViewModel(private val moviesRepository: MoviesRepository): ViewModel() {
+class MoviesViewModel(private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase): ViewModel() {
 
     fun fetchUpcomingMovies() = liveData(Dispatchers.IO) {
        emit(UpcomingMoviesResult.Loading())
        try {
-           emit(UpcomingMoviesResult.Success(moviesRepository.getUpcomingMovies()))
+           emit(UpcomingMoviesResult.Success(getUpcomingMoviesUseCase()))
        } catch (e: Exception) {
            emit(UpcomingMoviesResult.Failure(e))
        }
@@ -21,8 +21,8 @@ class MoviesViewModel(private val moviesRepository: MoviesRepository): ViewModel
 
 }
 
-class MoviesViewModelFactory(private val moviesRepository: MoviesRepository): ViewModelProvider.Factory {
+class MoviesViewModelFactory(private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(MoviesRepository::class.java).newInstance(moviesRepository)
+        return modelClass.getConstructor(GetUpcomingMoviesUseCase::class.java).newInstance(getUpcomingMoviesUseCase)
     }
 }
