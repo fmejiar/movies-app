@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MoviesApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_text_button">LogIn</string>
+    <string name="movie_detail_upcoming_movie_title">Upcoming Movie Title</string>
+    <string name="movie_detail_upcoming_movie_vote_average">8.2</string>
+    <string name="movie_detail_upcoming_movie_release_date">Released 04-03-22</string>
+    <string name="movie_detail_upcoming_movie_overview_title">Overview</string>
+    <string name="movie_detail_upcoming_movie_overview_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet elit nec enim tempor ullamcorper.</string>
 </resources>
