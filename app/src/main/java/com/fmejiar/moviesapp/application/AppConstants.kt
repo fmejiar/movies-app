@@ -9,4 +9,6 @@ object AppConstants {
     const val API_KEY_QUERY_PARAMS = "api_key"
     const val KEY_USERNAME = "Admin"
     const val KEY_PASSWORD = "Password*123"
+    const val SOCKET_HOSTNAME = "8.8.8.8"
+    const val SOCKET_PORT = 53
 }
