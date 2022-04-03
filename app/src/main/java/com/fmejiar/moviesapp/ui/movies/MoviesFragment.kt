@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.fmejiar.moviesapp.R
 import com.fmejiar.moviesapp.core.UpcomingMoviesResult
+import com.fmejiar.moviesapp.core.toast
 import com.fmejiar.moviesapp.data.model.Movie
 import com.fmejiar.moviesapp.data.remote.MoviesDataSource
 import com.fmejiar.moviesapp.databinding.FragmentMoviesBinding
@@ -73,6 +74,7 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
                     is UpcomingMoviesResult.Failure -> {
                         Log.d("Error", "${upcomingMoviesResult.exception}")
                         binding.progressBarRelativeLayout.visibility = View.GONE
+                        requireContext().toast("Ocurrió un error en el servicio")
                     }
                 }
             })
