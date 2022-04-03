@@ -13,7 +13,7 @@ import com.fmejiar.moviesapp.R
 import com.fmejiar.moviesapp.core.UpcomingMoviesResult
 import com.fmejiar.moviesapp.core.toast
 import com.fmejiar.moviesapp.data.model.Movie
-import com.fmejiar.moviesapp.data.remote.MoviesDataSource
+import com.fmejiar.moviesapp.data.remote.RemoteMoviesDataSource
 import com.fmejiar.moviesapp.databinding.FragmentMoviesBinding
 import com.fmejiar.moviesapp.domain.repository.MoviesRepositoryImpl
 import com.fmejiar.moviesapp.domain.repository.RetrofitClient.webService
@@ -27,7 +27,7 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
     private val moviesViewModel by viewModels<MoviesViewModel> {
         MoviesViewModelFactory(
             MoviesRepositoryImpl(
-                MoviesDataSource(webService)
+                RemoteMoviesDataSource(webService)
             )
         )
     }
