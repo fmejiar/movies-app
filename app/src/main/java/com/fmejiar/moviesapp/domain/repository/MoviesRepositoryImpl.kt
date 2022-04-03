@@ -23,4 +23,7 @@ class MoviesRepositoryImpl(
 
     }
 
+    override suspend fun doLogIn(user: String, password: String): Boolean =
+        localMoviesDataSource.doLogIn(user, password)
+
 }
