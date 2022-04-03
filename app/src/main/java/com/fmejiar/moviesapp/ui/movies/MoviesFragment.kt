@@ -86,11 +86,11 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
     override fun onUpcomingMovieClick(movie: Movie, position: Int) {
         Log.d("UpcomingMovie", "onUpcomingMovieClick: $movie")
         val action = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
-            movie.poster_path,
-            movie.vote_average.toFloat(),
-            movie.overview,
-            movie.title,
-            movie.release_date
+            movie.poster_path ?: "",
+            movie.vote_average?.toFloat() ?: 0.0f,
+            movie.overview ?: "",
+            movie.title ?: "",
+            movie.release_date ?: ""
         )
         findNavController().navigate(action)
     }
