@@ -5,7 +5,7 @@ import com.fmejiar.moviesapp.data.model.MovieList
 
 class LocalMoviesDataSource(private val moviesDao: MoviesDao) {
 
-    suspend fun getUpcomingMovies(): MovieList {
+    suspend fun getLocalUpcomingMovies(): MovieList {
         return moviesDao.getRoomUpcomingMovies().toMovieList()
     }
 }
