@@ -7,5 +7,6 @@ object AppConstants {
     const val EMPTY_STRING = ""
     const val GET_UPCOMING_MOVIES_API_URL = "movie/upcoming"
     const val API_KEY_QUERY_PARAMS = "api_key"
-
+    const val KEY_USERNAME = "Admin"
+    const val KEY_PASSWORD = "Password*123"
 }
