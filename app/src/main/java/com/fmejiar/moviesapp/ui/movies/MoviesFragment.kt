@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.fmejiar.moviesapp.R
 import com.fmejiar.moviesapp.core.UpcomingMoviesResult
 import com.fmejiar.moviesapp.core.toast
+import com.fmejiar.moviesapp.data.local.AppDatabase
+import com.fmejiar.moviesapp.data.local.LocalMoviesDataSource
 import com.fmejiar.moviesapp.data.model.Movie
 import com.fmejiar.moviesapp.data.remote.RemoteMoviesDataSource
 import com.fmejiar.moviesapp.databinding.FragmentMoviesBinding
@@ -27,7 +29,8 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
     private val moviesViewModel by viewModels<MoviesViewModel> {
         MoviesViewModelFactory(
             MoviesRepositoryImpl(
-                RemoteMoviesDataSource(webService)
+                RemoteMoviesDataSource(webService),
+                LocalMoviesDataSource(AppDatabase.getDatabase(requireContext()).moviesDao())
             )
         )
     }
