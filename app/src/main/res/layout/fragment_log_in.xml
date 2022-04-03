@@ -9,19 +9,19 @@
     <include
         android:id="@+id/include"
         layout="@layout/layout_movie_header"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_width="@dimen/size_0"
+        android:layout_height="@dimen/size_180"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutUsername"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/size_16"
+        android:layout_marginTop="@dimen/size_80"
+        android:layout_marginEnd="@dimen/size_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
@@ -29,15 +29,15 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/login_username_hint"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/size_8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutUsername"
         app:layout_constraintStart_toStartOf="@+id/textInputLayoutUsername"
@@ -49,16 +49,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Password" />
+            android:hint="@string/login_password_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonLogIn"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="212dp"
-        android:text="LogIn"
+        android:layout_marginTop="@dimen/size_16"
+        android:layout_marginBottom="@dimen/size_212"
+        android:text="@string/login_text_button"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutUsername"
