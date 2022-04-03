@@ -5,14 +5,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.fmejiar.moviesapp.R
-import com.fmejiar.moviesapp.core.isValidEmail
+import com.fmejiar.moviesapp.data.local.AppDatabase
+import com.fmejiar.moviesapp.data.local.LocalMoviesDataSource
+import com.fmejiar.moviesapp.data.remote.RemoteMoviesDataSource
 import com.fmejiar.moviesapp.databinding.FragmentLogInBinding
+import com.fmejiar.moviesapp.domain.repository.MoviesRepositoryImpl
+import com.fmejiar.moviesapp.domain.repository.RetrofitClient
+import com.fmejiar.moviesapp.domain.usecase.DoLogInUseCase
+import com.fmejiar.moviesapp.domain.usecase.GetUpcomingMoviesUseCase
+import com.fmejiar.moviesapp.presentation.MoviesViewModel
+import com.fmejiar.moviesapp.presentation.MoviesViewModelFactory
+import kotlinx.coroutines.launch
 
 class LogInFragment : Fragment() {
 
     private lateinit var binding: FragmentLogInBinding
+    private val moviesViewModel by activityViewModels<MoviesViewModel> {
+        MoviesViewModelFactory(
+            GetUpcomingMoviesUseCase(
+                MoviesRepositoryImpl(
+                    RemoteMoviesDataSource(RetrofitClient.webService),
+                    LocalMoviesDataSource(AppDatabase.getDatabase(requireContext()).moviesDao())
+                )
+            ),
+            DoLogInUseCase(
+                MoviesRepositoryImpl(
+                    RemoteMoviesDataSource(RetrofitClient.webService),
+                    LocalMoviesDataSource(AppDatabase.getDatabase(requireContext()).moviesDao())
+                )
+            )
+        )
+    }
+    private var isLogInSuccesful: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,24 +59,19 @@ class LogInFragment : Fragment() {
 
     private fun setupUI() {
         binding.buttonLogIn.setOnClickListener {
-            if(validateForm()) navigateToHome()
+            val user = binding.textInputLayoutUsername.editText?.text.toString()
+            val password = binding.textInputLayoutPassword.editText?.text.toString()
+            if (validateForm(user, password)) doLogin(user, password) // navigateToHome()
         }
     }
 
-    private fun validateForm():Boolean {
+    private fun validateForm(user: String, password: String): Boolean {
         clear()
-        val username = binding.textInputLayoutUsername.editText?.text.toString()
-        val password = binding.textInputLayoutPassword.editText?.text.toString()
-        if(username.isEmpty()) {
+        if (user.isEmpty()) {
             binding.textInputLayoutUsername.error = "Ingresar el nombre"
             return false
         }
-        if(!username.isValidEmail()) {
-            binding.textInputLayoutUsername.error = "E-mail inválido"
-            return false
-        }
-
-        if(password.isEmpty()) {
+        if (password.isEmpty()) {
             binding.textInputLayoutPassword.error = "Ingresar el password"
             return false
         }
@@ -57,6 +81,31 @@ class LogInFragment : Fragment() {
     private fun clear() {
         binding.textInputLayoutUsername.error = null
         binding.textInputLayoutPassword.error = null
+    }
+
+    private fun resetInputLayouts() {
+        binding.textInputLayoutUsername.editText?.text?.clear()
+        binding.textInputLayoutPassword.editText?.text?.clear()
+        binding.textInputLayoutUsername.editText?.requestFocus()
+    }
+
+    private fun doLogin(user: String, password: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            isLogInSuccesful = moviesViewModel.doLogin(user, password)
+        }
+        if(isLogInSuccesful) navigateToHome()
+        else showErrorMessage()
+    }
+
+    private fun showErrorMessage() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("")
+        builder.setMessage("El nombre de usuario o contraseña es incorrecto.")
+        builder.setPositiveButton("Entiendo") { _, _ ->
+            resetInputLayouts()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun navigateToHome() {
