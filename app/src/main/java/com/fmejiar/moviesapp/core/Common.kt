@@ -35,3 +35,19 @@ fun MovieEntity.toMovie(): Movie = Movie(
     this.vote_average,
     this.vote_count
 )
+
+fun Movie.toMovieEntity(): MovieEntity = MovieEntity(
+    this.id,
+    this.adult,
+    this.backdrop_path,
+    this.original_title,
+    this.original_language,
+    this.overview,
+    this.popularity,
+    this.poster_path,
+    this.release_date,
+    this.title,
+    this.video,
+    this.vote_average,
+    this.vote_count
+)
