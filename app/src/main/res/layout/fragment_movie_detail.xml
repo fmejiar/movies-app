@@ -16,12 +16,12 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/upcomingMovieMaterialCardView"
-            android:layout_width="120dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="@dimen/size_120"
+            android:layout_height="@dimen/size_200"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_marginBottom="@dimen/size_16"
             android:clipToPadding="true"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="@dimen/size_8"
             app:layout_constraintBottom_toTopOf="@+id/horizontalGuideline"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="333dp" />
+            app:layout_constraintGuide_begin="@dimen/size_333" />
 
         <TextView
             android:id="@+id/titleDetailTextView"
@@ -48,13 +48,13 @@
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="@dimen/size_25_sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/upcomingMovieMaterialCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Upcoming Movie Title" />
+            tools:text="@string/movie_detail_upcoming_movie_title" />
 
         <TextView
             android:id="@+id/voteAverageDetailTextView"
@@ -66,29 +66,29 @@
             app:drawableStartCompat="@drawable/ic_baseline_star_border_24"
             app:layout_constraintStart_toStartOf="@+id/releaseDateDetailTextView"
             app:layout_constraintTop_toTopOf="@+id/upcomingMovieMaterialCardView"
-            tools:text="8.2 (4312 Reviews)" />
+            tools:text="@string/movie_detail_upcoming_movie_vote_average" />
 
         <TextView
             android:id="@+id/releaseDateDetailTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
+            android:layout_marginTop="@dimen/size_8"
+            android:drawablePadding="@dimen/size_8"
             android:gravity="center"
             android:textColor="@color/black"
             app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/upcomingMovieMaterialCardView"
             app:layout_constraintTop_toBottomOf="@+id/voteAverageDetailTextView"
-            tools:text="Released 04-03-22" />
+            tools:text="@string/movie_detail_upcoming_movie_release_date" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Overview"
-            android:textSize="20sp"
+            android:padding="@dimen/size_16"
+            android:text="@string/movie_detail_upcoming_movie_overview_title"
+            android:textSize="@dimen/size_20_sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,13 +98,12 @@
             android:id="@+id/overviewDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/size_16"
+            android:layout_marginEnd="@dimen/size_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet elit nec enim tempor ullamcorper." />
-
+            tools:text="@string/movie_detail_upcoming_movie_overview_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
