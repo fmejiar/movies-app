@@ -1,5 +1,6 @@
 package com.fmejiar.moviesapp.domain.repository
 
+import com.fmejiar.moviesapp.core.InternetCheck
 import com.fmejiar.moviesapp.core.toMovieEntity
 import com.fmejiar.moviesapp.data.local.LocalMoviesDataSource
 import com.fmejiar.moviesapp.data.model.MovieList
@@ -11,10 +12,15 @@ class MoviesRepositoryImpl(
 ) : MoviesRepository {
 
     override suspend fun getUpcomingMovies(): MovieList {
-        remoteMoviesDataSource.getUpcomingMovies().results.map { movie ->
-            localMoviesDataSource.saveUpcomingMovie(movie.toMovieEntity())
+        return if (InternetCheck.isNetworkAvailable()) {
+            remoteMoviesDataSource.getUpcomingMovies().results.map { movie ->
+                localMoviesDataSource.saveUpcomingMovie(movie.toMovieEntity())
+            }
+            localMoviesDataSource.getLocalUpcomingMovies()
+        } else {
+            localMoviesDataSource.getLocalUpcomingMovies()
         }
-        return localMoviesDataSource.getLocalUpcomingMovies()
+
     }
 
 }
