@@ -8,6 +8,7 @@ import com.fmejiar.moviesapp.core.BaseViewHolder
 import com.fmejiar.moviesapp.data.model.Movie
 import com.fmejiar.moviesapp.databinding.MovieItemBinding
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
+import com.fmejiar.moviesapp.application.AppConstants.BASE_IMAGE_URL
 
 class UpcomingMoviesAdapter(
     private val itemClickListener: OnUpcomingMovieClickListener
@@ -52,7 +53,7 @@ class UpcomingMoviesAdapter(
 
         override fun bind(item: Movie) {
             Glide.with(binding.upcomingMovieImageView.context)
-                .load("https://image.tmdb.org/t/p/w500/${item.poster_path}")
+                .load("$BASE_IMAGE_URL${item.poster_path}")
                 .centerCrop()
                 .into(binding.upcomingMovieImageView)
         }

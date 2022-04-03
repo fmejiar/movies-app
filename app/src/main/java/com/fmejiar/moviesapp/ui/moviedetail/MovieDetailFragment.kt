@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.fmejiar.moviesapp.R
+import com.fmejiar.moviesapp.application.AppConstants.BASE_IMAGE_URL
 import com.fmejiar.moviesapp.databinding.FragmentMovieDetailBinding
 
 class MovieDetailFragment : Fragment() {
@@ -31,7 +32,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun setupUI() {
         Glide.with(requireContext())
-            .load("https://image.tmdb.org/t/p/w500/${args.posterPathImageUrl}").centerCrop()
+            .load("$BASE_IMAGE_URL${args.posterPathImageUrl}").centerCrop()
             .into(binding.posterPathDetailImageView)
         binding.titleDetailTextView.text = args.title
         binding.overviewDetailTextView.text = args.overview
