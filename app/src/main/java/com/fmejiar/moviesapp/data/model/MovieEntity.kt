@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity (tableName = "movieEntity")
 data class MovieEntity(
     @PrimaryKey
     val id: Int = -1,
