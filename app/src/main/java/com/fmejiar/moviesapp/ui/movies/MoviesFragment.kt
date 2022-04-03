@@ -22,6 +22,7 @@ import com.fmejiar.moviesapp.domain.repository.RetrofitClient.webService
 import com.fmejiar.moviesapp.presentation.MoviesViewModel
 import com.fmejiar.moviesapp.presentation.MoviesViewModelFactory
 import com.fmejiar.moviesapp.ui.adapter.UpcomingMoviesAdapter
+import androidx.activity.addCallback
 
 class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickListener {
 
@@ -55,10 +56,17 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
 
     private fun setupUI() {
         setupUpcomingMoviesRecyclerView()
+        setupOnBackPressedCallback()
     }
 
     private fun setupUpcomingMoviesRecyclerView() {
         binding.upcomingMoviesRecyclerView.adapter = upcomingMoviesAdapter
+    }
+
+    private fun setupOnBackPressedCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().finish()
+        }
     }
 
     private fun setupObserver() {
