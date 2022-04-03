@@ -12,4 +12,5 @@
     <string name="login_understand">Entiendo</string>
     <string name="login_enter_the_username">Ingresar el nombre</string>
     <string name="login_enter_the_password">Ingresar el password</string>
+    <string name="movies_service_error_message">Ocurrió un error en el servicio</string>
 </resources>

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.fmejiar.moviesapp.R
@@ -24,6 +23,7 @@ import com.fmejiar.moviesapp.presentation.MoviesViewModelFactory
 import com.fmejiar.moviesapp.ui.adapter.UpcomingMoviesAdapter
 import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
+import com.fmejiar.moviesapp.application.AppConstants.EMPTY_STRING
 import com.fmejiar.moviesapp.domain.usecase.DoLogInUseCase
 import com.fmejiar.moviesapp.domain.usecase.GetUpcomingMoviesUseCase
 
@@ -85,31 +85,27 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
             .observe(viewLifecycleOwner, Observer { upcomingMoviesResult ->
                 when (upcomingMoviesResult) {
                     is UpcomingMoviesResult.Loading -> {
-                        Log.d("LiveData", "Loading...")
                         binding.progressBarRelativeLayout.visibility = View.VISIBLE
                     }
                     is UpcomingMoviesResult.Success -> {
-                        Log.d("LiveData", "${upcomingMoviesResult.data}")
                         binding.progressBarRelativeLayout.visibility = View.GONE
                         upcomingMoviesAdapter.setUpcomingMovies(upcomingMoviesResult.data.results)
                     }
                     is UpcomingMoviesResult.Failure -> {
-                        Log.d("Error", "${upcomingMoviesResult.exception}")
                         binding.progressBarRelativeLayout.visibility = View.GONE
-                        requireContext().toast("Ocurrió un error en el servicio")
+                        requireContext().toast(getString(R.string.movies_service_error_message))
                     }
                 }
             })
     }
 
     override fun onUpcomingMovieClick(movie: Movie, position: Int) {
-        Log.d("UpcomingMovie", "onUpcomingMovieClick: $movie")
         val action = MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
-            movie.poster_path ?: "",
+            movie.poster_path ?: EMPTY_STRING,
             movie.vote_average?.toFloat() ?: 0.0f,
-            movie.overview ?: "",
-            movie.title ?: "",
-            movie.release_date ?: ""
+            movie.overview ?: EMPTY_STRING,
+            movie.title ?: EMPTY_STRING,
+            movie.release_date ?: EMPTY_STRING
         )
         findNavController().navigate(action)
     }
