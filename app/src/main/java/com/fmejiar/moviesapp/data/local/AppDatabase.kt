@@ -9,7 +9,7 @@ import com.fmejiar.moviesapp.data.model.MovieEntity
 @Database(entities = [MovieEntity::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
 
-    abstract fun movieDao(): MoviesDao
+    abstract fun moviesDao(): MoviesDao
 
     companion object {
 
@@ -29,6 +29,5 @@ abstract class AppDatabase: RoomDatabase() {
         }
 
     }
-
 
 }
