@@ -8,4 +8,8 @@
     <string name="movie_detail_upcoming_movie_release_date">Released 04-03-22</string>
     <string name="movie_detail_upcoming_movie_overview_title">Overview</string>
     <string name="movie_detail_upcoming_movie_overview_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet elit nec enim tempor ullamcorper.</string>
+    <string name="login_incorrect_user_or_password">El nombre de usuario o contraseña es incorrecto.</string>
+    <string name="login_understand">Entiendo</string>
+    <string name="login_enter_the_username">Ingresar el nombre</string>
+    <string name="login_enter_the_password">Ingresar el password</string>
 </resources>

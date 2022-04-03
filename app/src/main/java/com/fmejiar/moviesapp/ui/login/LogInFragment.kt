@@ -68,11 +68,11 @@ class LogInFragment : Fragment() {
     private fun validateForm(user: String, password: String): Boolean {
         clear()
         if (user.isEmpty()) {
-            binding.textInputLayoutUsername.error = "Ingresar el nombre"
+            binding.textInputLayoutUsername.error = getString(R.string.login_enter_the_username)
             return false
         }
         if (password.isEmpty()) {
-            binding.textInputLayoutPassword.error = "Ingresar el password"
+            binding.textInputLayoutPassword.error = getString(R.string.login_enter_the_password)
             return false
         }
         return true
@@ -100,8 +100,8 @@ class LogInFragment : Fragment() {
     private fun showErrorMessage() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setTitle("")
-        builder.setMessage("El nombre de usuario o contraseña es incorrecto.")
-        builder.setPositiveButton("Entiendo") { _, _ ->
+        builder.setMessage(getString(R.string.login_incorrect_user_or_password))
+        builder.setPositiveButton(getString(R.string.login_understand)) { _, _ ->
             resetInputLayouts()
         }
         val dialog: AlertDialog = builder.create()
