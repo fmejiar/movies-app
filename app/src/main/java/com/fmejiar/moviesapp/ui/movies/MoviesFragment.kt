@@ -23,14 +23,22 @@ import com.fmejiar.moviesapp.presentation.MoviesViewModel
 import com.fmejiar.moviesapp.presentation.MoviesViewModelFactory
 import com.fmejiar.moviesapp.ui.adapter.UpcomingMoviesAdapter
 import androidx.activity.addCallback
+import androidx.fragment.app.activityViewModels
+import com.fmejiar.moviesapp.domain.usecase.DoLogInUseCase
 import com.fmejiar.moviesapp.domain.usecase.GetUpcomingMoviesUseCase
 
 class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickListener {
 
     private lateinit var binding: FragmentMoviesBinding
-    private val moviesViewModel by viewModels<MoviesViewModel> {
+    private val moviesViewModel by activityViewModels<MoviesViewModel> {
         MoviesViewModelFactory(
             GetUpcomingMoviesUseCase(
+                MoviesRepositoryImpl(
+                    RemoteMoviesDataSource(webService),
+                    LocalMoviesDataSource(AppDatabase.getDatabase(requireContext()).moviesDao())
+                )
+            ),
+            DoLogInUseCase(
                 MoviesRepositoryImpl(
                     RemoteMoviesDataSource(webService),
                     LocalMoviesDataSource(AppDatabase.getDatabase(requireContext()).moviesDao())
