@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.fmejiar.moviesapp.data.model.MovieEntity
 
 @Dao
-interface MovieDao {
+interface MoviesDao {
 
     @Query("SELECT * FROM movieentity")
     suspend fun getRoomUpcomingMovies(): List<MovieEntity>
