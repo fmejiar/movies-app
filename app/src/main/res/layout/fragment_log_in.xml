@@ -60,6 +60,7 @@
         android:layout_marginBottom="@dimen/size_212"
         android:text="@string/login_text_button"
         android:textAllCaps="false"
+        android:backgroundTint="@color/purple_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutUsername"
         app:layout_constraintHorizontal_bias="0.498"
