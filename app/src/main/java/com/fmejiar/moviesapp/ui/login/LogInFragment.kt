@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.fmejiar.moviesapp.R
+import com.fmejiar.moviesapp.application.AppConstants.EMPTY_STRING
 import com.fmejiar.moviesapp.data.local.AppDatabase
 import com.fmejiar.moviesapp.data.local.LocalMoviesDataSource
 import com.fmejiar.moviesapp.data.remote.RemoteMoviesDataSource
@@ -99,7 +100,7 @@ class LogInFragment : Fragment() {
 
     private fun showErrorMessage() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("")
+        builder.setTitle(EMPTY_STRING)
         builder.setMessage(getString(R.string.login_incorrect_user_or_password))
         builder.setPositiveButton(getString(R.string.login_understand)) { _, _ ->
             resetInputLayouts()
