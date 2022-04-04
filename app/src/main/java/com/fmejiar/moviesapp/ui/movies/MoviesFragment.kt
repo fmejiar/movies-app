@@ -22,6 +22,7 @@ import com.fmejiar.moviesapp.presentation.MoviesViewModel
 import com.fmejiar.moviesapp.presentation.MoviesViewModelFactory
 import com.fmejiar.moviesapp.ui.adapter.UpcomingMoviesAdapter
 import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import com.fmejiar.moviesapp.application.AppConstants.EMPTY_STRING
 import com.fmejiar.moviesapp.domain.usecase.DoLogInUseCase
@@ -93,7 +94,7 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
                     }
                     is UpcomingMoviesResult.Failure -> {
                         binding.progressBarRelativeLayout.visibility = View.GONE
-                        requireContext().toast(getString(R.string.movies_service_error_message))
+                        showApiErrorMessage()
                     }
                 }
             })
@@ -108,6 +109,15 @@ class MoviesFragment : Fragment(), UpcomingMoviesAdapter.OnUpcomingMovieClickLis
             movie.release_date ?: EMPTY_STRING
         )
         findNavController().navigate(action)
+    }
+
+    private fun showApiErrorMessage() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(EMPTY_STRING)
+        builder.setMessage(getString(R.string.movies_service_error_message))
+        builder.setPositiveButton(getString(R.string.login_understand)) { _, _ -> }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
 }
