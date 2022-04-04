@@ -31,13 +31,15 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupUI() {
-        Glide.with(requireContext())
-            .load("$BASE_IMAGE_URL${args.posterPathImageUrl}").centerCrop()
-            .into(binding.posterPathDetailImageView)
-        binding.titleDetailTextView.text = args.title
-        binding.overviewDetailTextView.text = args.overview
-        binding.voteAverageDetailTextView.text = args.voteAverage.toString()
-        binding.releaseDateDetailTextView.text = "Released ${args.releaseDate}"
+        args.let {
+            Glide.with(requireContext())
+                .load("$BASE_IMAGE_URL${it.posterPathImageUrl}").centerCrop()
+                .into(binding.posterPathDetailImageView)
+            binding.titleDetailTextView.text = it.title
+            binding.overviewDetailTextView.text = it.overview
+            binding.voteAverageDetailTextView.text = it.voteAverage.toString()
+            binding.releaseDateDetailTextView.text = "Released ${it.releaseDate}"
+        }
     }
 
 }
